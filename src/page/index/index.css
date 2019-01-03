@@ -5,10 +5,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: searchNameAnimation 1s ease-in-out;
+  animation: searchNameAnimation .6s ease-in-out;
+  transition: all .4s;
+
 }
 
-.header {
+.search-name.active {
   width: 100%;
   top: 0;
   right: 0;
@@ -20,10 +22,25 @@
   background-color: #fff;
   padding: 10px 20px;
   box-sizing: border-box;
+  border-bottom: 1px solid #dedede;
+  box-shadow: 0 0 21px 0 rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  display: none
+}
+
+.search-input.active {
+  display: block
 }
 
 .avatar-img {
   float: right;
+  display: none
+}
+
+.avatar-img.active {
+  display: block;
 }
 
 @keyframes searchNameAnimation {

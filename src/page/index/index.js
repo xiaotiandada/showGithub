@@ -1,39 +1,46 @@
 import React, { Component } from "react";
 import "./index.css";
 import { Input } from "antd";
-import { Menu, Icon } from "antd";
 import { Avatar } from "antd";
 
 const Search = Input.Search;
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 class App extends Component {
-  state = {
-    current: "mail"
-  };
+  constructor() {
+    super();
+    this.state = {
+      headerStatus: false,
+      current: "mail"
+    };
+    this.toggleHeader = this.toggleHeader.bind(this);
+  }
 
-  handleClick = e => {
-    console.log("click ", e);
+  toggleHeader() {
     this.setState({
-      current: e.key
+      headerStatus: !this.state.headerStatus
     });
-  };
+  }
 
   render() {
     return (
-      <header className="search-name header">
+      <header
+        className={`search-name ${this.state.headerStatus ? "active" : ""}`}
+      >
         <Search
-          style={{
-            display: "none"
-          }}
+          className={`search-input ${!this.state.headerStatus ? "active" : ""}`}
           size="large"
           placeholder="请输入Githun用户名"
-          onSearch={value => console.log(value)}
+          onSearch={value => {
+            this.toggleHeader();
+            console.log(value);
+            console.log(this.state.headerStatus);
+          }}
           enterButton
         />
-        <div className="avatar-img">
-          <Avatar size="large" icon="user" />
+        <div
+          className={`avatar-img ${this.state.headerStatus ? "active" : ""}`}
+        >
+          <Avatar onClick={this.toggleHeader} size="large" icon="user" />
         </div>
       </header>
     );
