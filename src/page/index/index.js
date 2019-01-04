@@ -33,7 +33,6 @@ class App extends Component {
           onSearch={value => {
             this.toggleHeader();
             console.log(value);
-            console.log(this.state.headerStatus);
           }}
           enterButton
         />
