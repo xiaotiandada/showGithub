@@ -7,7 +7,6 @@
   transform: translate(-50%, -50%);
   animation: searchNameAnimation .6s ease-in-out;
   transition: all .4s;
-
 }
 
 .search-name.active {
@@ -17,31 +16,27 @@
   left: 0;
   transform: translate(0, 0);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: rgba(31, 33, 41, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid rgba(31, 33, 41, 0.2);
   box-shadow: 0 0 21px 0 rgba(0, 0, 0, 0.1);
 }
 
-.search-input {
-  display: none
+.search-input input {
+  background-color: transparent;
+  color: #fff;
+  border-color: #bcbcbc;
 }
 
-.search-input.active {
-  display: block
+.user-name {
+  color: #fff;
+  padding: 0;
+  margin: 0;
 }
 
-.avatar-img {
-  float: right;
-  display: none
-}
-
-.avatar-img.active {
-  display: block;
-}
 
 @keyframes searchNameAnimation {
   from {
