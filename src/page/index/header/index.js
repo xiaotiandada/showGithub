@@ -55,13 +55,14 @@ class App extends Component {
     const AlertDom = () => {
       return (
         <Fragment>
+          {" "}
           {this.state.inShow && (
             <Alert
               message={this.state.message}
               type={this.state.type}
               showIcon
             />
-          )}
+          )}{" "}
         </Fragment>
       );
     };
@@ -69,6 +70,7 @@ class App extends Component {
     const SearchDom = () => {
       return (
         <Fragment>
+          {" "}
           {!this.state.headerStatus && (
             <Search
               className="search-input"
@@ -78,7 +80,7 @@ class App extends Component {
               onSearch={this.searchValue}
               enterButton
             />
-          )}
+          )}{" "}
         </Fragment>
       );
     };
