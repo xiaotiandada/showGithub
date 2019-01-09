@@ -23,16 +23,19 @@ class App extends Component {
     this.setState({
       userName: name
     });
-    this.searchUser();
+    this.searchUser(name);
+    this.setState({
+      detailShow: !this.state.detailShow
+    });
   }
 
-  async searchUser() {
+  async searchUser(name) {
     this.abortRequest();
     let query = {
-      q: this.state.userName,
+      q: name,
       cancelToken: this.createCancelToken()
     };
-
+    console.log(1);
     await Api.searchUser(query)
       .then(response => {
         console.log(response);
@@ -41,9 +44,6 @@ class App extends Component {
             data: response.data.items
           });
         }
-        this.setState({
-          detailShow: !this.state.detailShow
-        });
       })
       .catch(err => {
         console.log(err);
@@ -67,6 +67,7 @@ class App extends Component {
     return (
       <Fragment>
         <Header toggleDetailShow={this.toggleDetailShow} />
+
         {this.state.detailShow && <Detail data={this.state.data} />}
       </Fragment>
     );
