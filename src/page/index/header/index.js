@@ -2,13 +2,18 @@ import React, { Component, Fragment } from "react";
 import "./index.css";
 import { Input, Avatar, Alert } from "antd";
 
+import { connect } from "react-redux";
+import action from "../../../store/action/index";
+
+import Api from "../../../services/get-user-info";
+
 const Search = Input.Search;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
+      userName: this.props.userName,
       headerStatus: false,
       message: "",
       type: "",
@@ -28,14 +33,15 @@ class App extends Component {
   }
 
   searchValue(value) {
+    const { setUserName } = this.props;
     if (!value) {
       this.toggleAlertShow("请输入用户名", "error");
-      return;
+      return false;
     }
-    this.setState({
-      userName: value
-    });
+    this.state.userName = value;
+    setUserName(value);
     this.toggleHeader();
+    this.searchUser();
   }
 
   toggleAlertShow(val, type) {
@@ -49,6 +55,21 @@ class App extends Component {
     toggleAlert(val, type);
 
     setTimeout(() => toggleAlert(""), 2000);
+  }
+
+  searchUser() {
+    console.log(this.state.userName);
+    let query = {
+      q: this.state.userName
+    };
+
+    Api.searchUser(query)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -112,4 +133,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+});
+export default connect(
+  mapStateToProps,
+  action
+)(App);

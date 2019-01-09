@@ -1,0 +1,5 @@
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+
+export const SETUSERNAME = 'SETUSERNAME'
+export const REMOVEUSERNAME = 'REMOVEUSERNAME'

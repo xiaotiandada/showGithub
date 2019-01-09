@@ -1,4 +1,4 @@
-import * as ActionType from '../action/actionTypes'
+import * as ActionType from '../action/action-types'
 export default (state = 0, action) => {
   switch (action.type) {
     case ActionType.INCREMENT:
