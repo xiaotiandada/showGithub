@@ -1,4 +1,5 @@
-import axios from "axios";
-const cancenToken = () => axios.CancelToken.source();
+import axios from 'axios'
 
-export default cancenToken;
+const cancelToken = () => axios.CancelToken.source()
+
+export default cancelToken

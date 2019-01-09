@@ -5,8 +5,6 @@ import { Input, Avatar, Alert } from "antd";
 import { connect } from "react-redux";
 import action from "../../../store/action/index";
 
-import Api from "../../../services/get-user-info";
-
 const Search = Input.Search;
 
 class App extends Component {
@@ -25,23 +23,23 @@ class App extends Component {
   }
 
   toggleHeader() {
-    const { toggleDetailShow } = this.props;
     this.setState({
       headerStatus: !this.state.headerStatus
     });
-    toggleDetailShow();
   }
 
   searchValue(value) {
-    const { setUserName } = this.props;
+    const { setUserName, toggleDetailShow } = this.props;
     if (!value) {
       this.toggleAlertShow("请输入用户名", "error");
       return false;
     }
-    this.state.userName = value;
+    this.setState({
+      userName: value
+    });
     setUserName(value);
+    toggleDetailShow(value);
     this.toggleHeader();
-    this.searchUser();
   }
 
   toggleAlertShow(val, type) {
@@ -57,33 +55,17 @@ class App extends Component {
     setTimeout(() => toggleAlert(""), 2000);
   }
 
-  searchUser() {
-    console.log(this.state.userName);
-    let query = {
-      q: this.state.userName
-    };
-
-    Api.searchUser(query)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   render() {
     const AlertDom = () => {
       return (
         <Fragment>
-          {" "}
           {this.state.inShow && (
             <Alert
               message={this.state.message}
               type={this.state.type}
               showIcon
             />
-          )}{" "}
+          )}
         </Fragment>
       );
     };
@@ -91,7 +73,6 @@ class App extends Component {
     const SearchDom = () => {
       return (
         <Fragment>
-          {" "}
           {!this.state.headerStatus && (
             <Search
               className="search-input"
@@ -101,7 +82,7 @@ class App extends Component {
               onSearch={this.searchValue}
               enterButton
             />
-          )}{" "}
+          )}
         </Fragment>
       );
     };
