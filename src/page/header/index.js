@@ -3,7 +3,7 @@ import "./index.css";
 import { Input, Avatar, Alert } from "antd";
 
 import { connect } from "react-redux";
-import action from "../../../store/action/index";
+import action from "../../store/action/index";
 
 const Search = Input.Search;
 

@@ -1,0 +1,20 @@
+.user-list {
+  background-color: #282b36;
+  color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 3px;
+}
+
+.ant-list-item-meta-title {
+  color: #eee;
+}
+
+
+.ant-list-item-meta-description {
+  color: #eee;
+}
+
+.ant-list-split .ant-list-item {
+  border-bottom: 1px solid #494949;
+}
