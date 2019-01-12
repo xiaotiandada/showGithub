@@ -2,8 +2,9 @@
   background-color: #282b36;
   color: #fff;
   padding: 20px;
-  margin: 20px;
+  margin: 100px 10px 0;
   border-radius: 3px;
+  animation: slideInUp 1s ease-in-out;
 }
 
 .ant-list-item-meta-title {
@@ -17,4 +18,15 @@
 
 .ant-list-split .ant-list-item {
   border-bottom: 1px solid #494949;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate(0, 40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
 }

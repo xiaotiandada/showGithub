@@ -1,48 +1,37 @@
 import React, { Component, Fragment } from "react";
-import "./index.css";
-import { Avatar } from "antd";
+import "./style/index.css";
 
+import { BackTop } from "antd";
+
+import Base from "./base";
+import List from "./list";
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      userProfileList: {
-        name: "xiaotian",
-        dec: "xiaotiandada",
-        bio: "xxxxxxxxxxxxxx",
-        company: "student",
-        location: "chind",
-        email: "www@qq.com",
-        url: "sssssssssssss.com"
-      }
+      showBaseOrList: false
     };
+    this.toggleBaseOrList = this.toggleBaseOrList.bind(this);
+  }
+
+  toggleBaseOrList(boolean) {
+    this.setState({
+      showBaseOrList: boolean
+    });
   }
 
   render() {
-    const ProfileDom = () => {
-      let list = this.state.userProfileList;
-      const listItem = Object.keys(list).map((item, index) => (
-        <li key={index}>{list[item]}</li>
-      ));
-      return <ul>{listItem}</ul>;
-    };
-
     return (
       <Fragment>
-        <div className="detail-container">
-          <div className="detail-base">
-            <Avatar className="base-avatar" size={100} icon="user" />
-            <ProfileDom />
-          </div>
-          <div className="detail-base">
-            <Avatar className="base-avatar" size={100} icon="user" />
-            <ProfileDom />
-          </div>
-          <div className="detail-base">
-            <Avatar className="base-avatar" size={100} icon="user" />
-            <ProfileDom />
-          </div>
-        </div>
+        {this.state.showBaseOrList ? (
+          <Base toggleBaseOrList={this.toggleBaseOrList} />
+        ) : (
+          <List
+            toggleBaseOrList={this.toggleBaseOrList}
+            dataChild={{ ...this.props }}
+          />
+        )}
+        <BackTop />
       </Fragment>
     );
   }

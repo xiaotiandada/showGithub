@@ -1,20 +1,20 @@
 import React, { Component, Fragment } from "react";
-import "./index.css";
 import { List, Avatar } from "antd";
-import { withRouter } from "react-router-dom";
 
-class listDom extends Component {
+class App extends Component {
   viewUserInfo(html_url) {
+    const { toggleBaseOrList } = this.props;
     console.log(html_url);
-    this.props.history.push("/users");
+    toggleBaseOrList(true);
   }
   render() {
+    const { dataChild } = this.props;
     return (
       <Fragment>
         <List
           className="user-list"
           itemLayout="horizontal"
-          dataSource={this.props.data}
+          dataSource={dataChild.userList}
           renderItem={item => (
             <List.Item>
               <List.Item.Meta
@@ -31,4 +31,4 @@ class listDom extends Component {
   }
 }
 
-export default withRouter(listDom);
+export default App;

@@ -1,10 +1,19 @@
 import React, { Component, Fragment } from "react";
 import "./index.css";
+
+// antd
 import { Input, Avatar, Alert } from "antd";
 
+// redux
 import { connect } from "react-redux";
 import action from "../../store/action/index";
 
+// 接口
+import Api from "../../services/get-user-info";
+import cancelToken from "../../services/cancel-token";
+
+// components
+import SpinDom from "../components/spin";
 const Search = Input.Search;
 
 class App extends Component {
@@ -13,6 +22,8 @@ class App extends Component {
     this.state = {
       userName: this.props.userName,
       headerStatus: false,
+      source: false,
+      showSpin: false,
       message: "",
       type: "",
       inShow: false
@@ -22,14 +33,8 @@ class App extends Component {
     this.searchValue = this.searchValue.bind(this);
   }
 
-  toggleHeader() {
-    this.setState({
-      headerStatus: !this.state.headerStatus
-    });
-  }
-
   searchValue(value) {
-    const { setUserName, toggleDetailShow } = this.props;
+    const { setUserName } = this.props;
     if (!value) {
       this.toggleAlertShow("请输入用户名", "error");
       return false;
@@ -38,8 +43,51 @@ class App extends Component {
       userName: value
     });
     setUserName(value);
-    toggleDetailShow(value);
-    this.toggleHeader();
+    this.searchUser(value);
+  }
+
+  async searchUser(name) {
+    this.setState({ showSpin: true });
+    this.abortRequest();
+    let query = {
+      q: name,
+      cancelToken: this.createCancelToken()
+    };
+    await Api.searchUser(query)
+      .then(response => {
+        const { toggleDetailShow, sendData } = this.props;
+        if (response.status === 200) {
+          this.toggleHeader(true);
+          toggleDetailShow(true);
+          sendData(response);
+          this.setState({ showSpin: false });
+        } else {
+          this.toggleHeader(false);
+          toggleDetailShow(false);
+          sendData([]);
+          this.setState({ showSpin: false });
+          console.log("失败");
+        }
+      })
+      .catch(err => {
+        this.setState({ showSpin: false });
+        console.log(err);
+      });
+  }
+  abortRequest() {
+    this.state.source && this.state.source.cancel();
+  }
+
+  createCancelToken() {
+    const source = cancelToken();
+    this.state.source = source;
+    return source.token;
+  }
+
+  toggleHeader(boolean) {
+    this.setState({
+      headerStatus: boolean
+    });
   }
 
   toggleAlertShow(val, type) {
@@ -93,7 +141,7 @@ class App extends Component {
           {this.state.headerStatus && (
             <Fragment>
               <h1 className="user-name"> {this.state.userName} </h1>
-              <Avatar onClick={this.toggleHeader} size="large" icon="user" />
+              <Avatar size="large" icon="user" />
             </Fragment>
           )}
         </Fragment>
@@ -109,6 +157,7 @@ class App extends Component {
           <AvatarAndNameDom />
         </header>
         <AlertDom />
+        <SpinDom showSpin={this.state.showSpin} />
       </Fragment>
     );
   }
