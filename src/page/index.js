@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
 
 // 引入组件
 import Header from "./header/index";

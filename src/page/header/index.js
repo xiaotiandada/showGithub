@@ -80,7 +80,9 @@ class App extends Component {
 
   createCancelToken() {
     const source = cancelToken();
-    this.state.source = source;
+    this.setState({
+      source
+    });
     return source.token;
   }
 

@@ -2,10 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Spin } from "antd";
 
 class App extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     const { showSpin } = this.props;
     return (
