@@ -5,5 +5,8 @@ export default {
     return Api().get('/search/users', {
       params
     })
+  },
+  getUnserInfo(params) {
+    return Api().get(`/users/${params}`)
   }
 }

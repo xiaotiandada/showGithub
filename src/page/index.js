@@ -19,6 +19,7 @@ class App extends Component {
     this.setState({ detailShow });
   }
   sendData(res) {
+    console.log(res);
     this.setState({
       userList: res.data.items
     });

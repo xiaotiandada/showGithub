@@ -9,14 +9,16 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      showBaseOrList: false
+      showBaseOrList: false,
+      data: Object.create(null)
     };
-    this.toggleBaseOrList = this.toggleBaseOrList.bind(this);
+    this.sendData = this.sendData.bind(this);
   }
 
-  toggleBaseOrList(boolean) {
+  sendData(boolean, data) {
     this.setState({
-      showBaseOrList: boolean
+      showBaseOrList: boolean,
+      data
     });
   }
 
@@ -24,12 +26,9 @@ class App extends Component {
     return (
       <Fragment>
         {this.state.showBaseOrList ? (
-          <Base toggleBaseOrList={this.toggleBaseOrList} />
+          <Base sendData={this.sendData} data={this.state.data} />
         ) : (
-          <List
-            toggleBaseOrList={this.toggleBaseOrList}
-            dataChild={{ ...this.props }}
-          />
+          <List sendData={this.sendData} dataChild={{ ...this.props }} />
         )}
         <BackTop />
       </Fragment>
