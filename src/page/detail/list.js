@@ -5,28 +5,47 @@ import { List, Avatar } from "antd";
 import Api from "../../services/get-user-info";
 // import cancelToken from "../../services/cancel-token";
 
+import axios from "axios";
+
 class App extends Component {
   constructor() {
     super();
     this.sendResponseData = this.sendResponseData.bind(this);
   }
   viewUserInfo(login) {
-    console.log(login);
-    this.getUserInfo(login);
+    this.getUserDetail(login);
   }
 
-  async getUserInfo(name) {
-    let params = name;
-    await Api.getUnserInfo(params)
-      .then(response => {
-        if (response.status === 200) {
-          this.sendResponseData(true, response.data);
-        } else {
-          console.log("失败");
-        }
-      })
-      .catch(error => {
-        console.log(error);
+  // 得到用户信息
+  getUserDetail(name) {
+    const getUserInfo = async name => {
+      return await Api.getUserInfo(name);
+    };
+    // https://developer.github.com/v3/repos/#list-your-repositories
+    const getRepos = async name => {
+      return await Api.getRepos(name);
+    };
+    axios
+      .all([getUserInfo(name), getRepos(name)])
+      .then(
+        axios.spread((getUserInfo, gerRepos) => {
+          let arrData = Object.create(null);
+          console.log(getUserInfo, gerRepos);
+          if (getUserInfo.status === 200) {
+            arrData.getUserInfo = getUserInfo.data;
+          } else {
+            console.log("失败");
+          }
+          if (gerRepos.status === 200) {
+            arrData.gerRepos = gerRepos.data;
+          } else {
+            console.log("失败");
+          }
+          this.sendResponseData(true, arrData);
+        })
+      )
+      .catch(err => {
+        console.log(err);
       });
   }
 

@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.11.6",
     "axios": "^0.18.0",
+    "bizcharts": "^3.4.3",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",

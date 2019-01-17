@@ -6,7 +6,7 @@
 
 .detail-base {
   width: 400px;
-  height: 600px;
+  height: 640px;
   margin: 0 10px;
   background-color: #282b36;
   border-radius: 3px;
@@ -71,6 +71,21 @@
   padding: 0;
 }
 
+.language {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.language-tag {
+  padding: 4px 6px;
+  margin: 4px 4px;
+  font-size: 14px;
+  background-color: #2e8cd5;
+  color: #eee;
+  line-height: 1.5;
+  border-radius: 3px;
+  display: inline-block;
+}
 
 .detail-user {
   display: flex;

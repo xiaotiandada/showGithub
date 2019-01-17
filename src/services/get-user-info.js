@@ -6,7 +6,10 @@ export default {
       params
     })
   },
-  getUnserInfo(params) {
-    return Api().get(`/users/${params}`)
+  getUserInfo(name) {
+    return Api().get(`/users/${name}`)
+  },
+  getRepos(name) {
+    return Api().get(`/users/${name}/repos`)
   }
 }

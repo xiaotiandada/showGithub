@@ -4,64 +4,77 @@ import { Avatar } from "antd";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userinfo: this.props.data
-    };
+    this.state = {};
     this.avatarClick = this.avatarClick.bind(this);
   }
   avatarClick() {
     const { sendData } = this.props;
     sendData(false, "");
   }
+
+  // 获取仓库语言分类
+  getLanguage(arr) {
+    const languageArr = arr.map(item => item["language"]);
+    const languageArrSet = [...new Set(languageArr)];
+    return languageArrSet.filter(item => !!item);
+  }
+
   render() {
-    const { data } = this.props;
+    const { getUserInfo, gerRepos } = this.props.data;
     console.log(this.props);
+    const LanguageTagDom = parpos => {
+      return parpos["data"].map((item, index) => (
+        <span className="language-tag" key={index}>
+          {item}
+        </span>
+      ));
+    };
     return (
       <Fragment>
         <div className="detail-container">
           <div className="detail-base">
             <div className="detail-base-avatar">
-              <img src={data.avatar_url} alt="avatar" />
+              <img src={getUserInfo.avatar_url} alt="avatar" />
             </div>
             <Avatar
-              src={data.avatar_url}
+              src={getUserInfo.avatar_url}
               onClick={this.avatarClick}
               className="base-avatar"
               size={100}
               icon="user"
             />
-            <h1 className="detail-base-user">{data.name}</h1>
+            <h1 className="detail-base-user">{getUserInfo.name}</h1>
             <ul>
               <li>
                 <span className="info-name">帐号</span>
-                <span>{data.login || "人家不想告诉你QAQ~"}</span>
+                <span>{getUserInfo.login || "人家不想告诉你QAQ~"}</span>
               </li>
               <li>
                 <span className="info-name">简介</span>
-                <span>{data.bio || "人家不想告诉你QAQ~"}</span>
+                <span>{getUserInfo.bio || "人家不想告诉你QAQ~"}</span>
               </li>
               <li>
                 <span className="info-name">公司</span>
-                <span>{data.company || "人家不想告诉你QAQ~"}</span>
+                <span>{getUserInfo.company || "人家不想告诉你QAQ~"}</span>
               </li>
               <li>
                 <span className="info-name">地址</span>
-                <span>{data.location || "人家不想告诉你QAQ~"}</span>
+                <span>{getUserInfo.location || "人家不想告诉你QAQ~"}</span>
               </li>
               <li>
                 <span className="info-name">邮箱</span>
-                <span>{data.email || "人家不想告诉你QAQ~"}</span>
+                <span>{getUserInfo.email || "人家不想告诉你QAQ~"}</span>
               </li>
               <li>
                 <span className="info-name">网址</span>
                 <span>
-                  {data.blog ? (
+                  {getUserInfo.blog ? (
                     <a
                       target="_blank"
-                      href={data.blog}
+                      href={getUserInfo.blog}
                       rel="noopener noreferrer"
                     >
-                      {data.blog}
+                      {getUserInfo.blog}
                     </a>
                   ) : (
                     "人家不想告诉你QAQ~"
@@ -69,6 +82,9 @@ class App extends Component {
                 </span>
               </li>
             </ul>
+            <div className="language">
+              <LanguageTagDom data={this.getLanguage(gerRepos)} />
+            </div>
           </div>
           <div className="detail-user" />
         </div>
