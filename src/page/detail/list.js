@@ -12,6 +12,11 @@ class App extends Component {
     super();
     this.sendResponseData = this.sendResponseData.bind(this);
   }
+
+  componentDidMount() {
+    this.getUserDetail("xiaotiandada");
+  }
+
   viewUserInfo(login) {
     this.getUserDetail(login);
   }
