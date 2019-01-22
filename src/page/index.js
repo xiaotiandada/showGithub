@@ -4,6 +4,22 @@ import React, { Component, Fragment } from "react";
 import Header from "./header/index";
 import Detail from "./detail/index";
 
+import {
+  G2,
+  Chart,
+  Geom,
+  Axis,
+  Tooltip,
+  Coord,
+  Label,
+  Legend,
+  View,
+  Guide,
+  Shape,
+  Facet,
+  Util
+} from "bizcharts";
+
 class App extends Component {
   constructor() {
     super();
@@ -26,6 +42,12 @@ class App extends Component {
   }
 
   render() {
+    const data = [{ month: "Jan.", count: 69, city: "tokyo" }];
+    const scale = {
+      month: { alias: "Month" },
+      count: { alias: "Sales" }
+    };
+
     return (
       <Fragment>
         <Header
@@ -33,6 +55,13 @@ class App extends Component {
           sendData={this.sendData}
         />
         {this.state.detailShow && <Detail userList={this.state.userList} />}
+        <Chart height={400} data={data} scale={scale} forceFit>
+          <Axis title name="month" />
+          <Axis title name="count" />
+          <Legend />
+          <Tooltip crosshairs={{ type: "rect" }} />
+          <Geom type="interval" position="month*count" color="month" />
+        </Chart>
       </Fragment>
     );
   }
