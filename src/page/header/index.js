@@ -21,7 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       userName: this.props.userName,
-      headerStatus: false,
+      headerStatus: true,
       source: false,
       showSpin: false,
       message: "",
@@ -31,6 +31,10 @@ class App extends Component {
     this.toggleHeader = this.toggleHeader.bind(this);
     this.toggleAlertShow = this.toggleAlertShow.bind(this);
     this.searchValue = this.searchValue.bind(this);
+  }
+
+  componentDidMount() {
+    this.searchValue("xiaotiandada");
   }
 
   searchValue(value) {
