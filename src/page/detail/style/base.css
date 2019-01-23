@@ -94,6 +94,7 @@
   margin: 0 10px;
   background-color: #282b36;
   border-radius: 3px;
+  flex-direction: column;
 }
 
 
@@ -121,8 +122,45 @@
   position: relative;
   overflow: hidden;
   /* flex: 1 0 400px; */
+  padding: 10px;
 }
 
+
+.followers-user {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.detail-info__title {
+  color: #eee;
+  padding: 0;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.followers-user li {
+  flex: 0 0 15%;
+  color: #eee;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 0;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.followers-user li img {
+  width: 100%;
+}
 
 @keyframes slideInUp {
   from {

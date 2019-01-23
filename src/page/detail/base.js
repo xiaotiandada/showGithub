@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Avatar } from "antd";
+import { Avatar, Tooltip } from "antd";
 
-import Calendarhorizontal from "./calendarhorizontal";
+import Basiccolumn from "./basiccolumn";
 
 class App extends Component {
   constructor(props) {
@@ -21,8 +21,26 @@ class App extends Component {
     return languageArrSet.filter(item => !!item);
   }
 
+  getRepos(arr) {
+    let dataArr = [];
+    arr.map(item => {
+      if (item["stargazers_count"]) {
+        dataArr.push({
+          name: item["name"],
+          count: item["stargazers_count"]
+        });
+      }
+    });
+    return dataArr;
+  }
+
   render() {
-    const { getUserInfo, gerRepos, getFollowers } = this.props.data;
+    const {
+      getUserInfo,
+      gerRepos,
+      getFollowers,
+      getFollowing
+    } = this.props.data;
     console.log(this.props);
     const LanguageTagDom = props => {
       return props["data"].map((item, index) => (
@@ -34,10 +52,13 @@ class App extends Component {
 
     const FollowersDom = props => {
       return props.map((item, i) => (
-        <div className="followers-user" key={i}>
-          <img src={item["avatar_url"]} alt={item["login"]} />
-          <p>{item["login"]}</p>
-        </div>
+        <Tooltip title={item["login"]} key={i}>
+          <li>
+            <a href={item["html_url"]} target="_blank">
+              <img src={item["avatar_url"]} alt={item["login"]} />
+            </a>
+          </li>
+        </Tooltip>
       ));
     };
 
@@ -99,11 +120,23 @@ class App extends Component {
             </div>
           </div>
           <div className="detail-user">
-            <Calendarhorizontal />
+            <div className="detail-user__blocl">
+              <div className="number">{getUserInfo["public_repos"]}</div>
+              <div className="number">{getUserInfo["followers"]}</div>
+              <div className="number">{getUserInfo["following"]}</div>
+            </div>
+            <Basiccolumn data={this.getRepos(gerRepos)} />
           </div>
           <div className="detail-info">
-            <p>followers</p>
-            {FollowersDom(getFollowers)}
+            <p className="detail-info__title">
+              Followers - {getUserInfo["followers"]}
+            </p>
+            <ul className="followers-user">{FollowersDom(getFollowers)}</ul>
+
+            <p className="detail-info__title">
+              Following - {getUserInfo["following"]}
+            </p>
+            <ul className="followers-user">{FollowersDom(getFollowing)}</ul>
           </div>
         </div>
       </Fragment>
