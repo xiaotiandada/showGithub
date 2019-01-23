@@ -22,13 +22,22 @@ class App extends Component {
   }
 
   render() {
-    const { getUserInfo, gerRepos } = this.props.data;
+    const { getUserInfo, gerRepos, getFollowers } = this.props.data;
     console.log(this.props);
-    const LanguageTagDom = parpos => {
-      return parpos["data"].map((item, index) => (
+    const LanguageTagDom = props => {
+      return props["data"].map((item, index) => (
         <span className="language-tag" key={index}>
           {item}
         </span>
+      ));
+    };
+
+    const FollowersDom = props => {
+      return props.map((item, i) => (
+        <div className="followers-user" key={i}>
+          <img src={item["avatar_url"]} alt={item["login"]} />
+          <p>{item["login"]}</p>
+        </div>
       ));
     };
 
@@ -91,6 +100,10 @@ class App extends Component {
           </div>
           <div className="detail-user">
             <Calendarhorizontal />
+          </div>
+          <div className="detail-info">
+            <p>followers</p>
+            {FollowersDom(getFollowers)}
           </div>
         </div>
       </Fragment>

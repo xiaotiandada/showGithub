@@ -11,5 +11,8 @@ export default {
   },
   getRepos(name) {
     return Api().get(`/users/${name}/repos`)
+  },
+  getFollowers(name) {
+    return Api().get(`/users/${name}/followers`)
   }
 }

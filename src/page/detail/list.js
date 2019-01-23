@@ -23,19 +23,18 @@ class App extends Component {
 
   // 得到用户信息
   getUserDetail(name) {
-    const getUserInfo = async name => {
-      return await Api.getUserInfo(name);
-    };
+    const getUserInfo = async name => await Api.getUserInfo(name);
+
     // https://developer.github.com/v3/repos/#list-your-repositories
-    const getRepos = async name => {
-      return await Api.getRepos(name);
-    };
+    const getRepos = async name => await Api.getRepos(name);
+
+    const getFollowers = async name => await Api.getFollowers(name);
+
     axios
-      .all([getUserInfo(name), getRepos(name)])
+      .all([getUserInfo(name), getRepos(name), getFollowers(name)])
       .then(
-        axios.spread((getUserInfo, gerRepos) => {
+        axios.spread((getUserInfo, gerRepos, getFollowers) => {
           let arrData = Object.create(null);
-          console.log(getUserInfo, gerRepos);
           if (getUserInfo.status === 200) {
             arrData.getUserInfo = getUserInfo.data;
           } else {
@@ -43,6 +42,12 @@ class App extends Component {
           }
           if (gerRepos.status === 200) {
             arrData.gerRepos = gerRepos.data;
+          } else {
+            console.log("失败");
+          }
+
+          if (getFollowers.status === 200) {
+            arrData.getFollowers = getFollowers.data;
           } else {
             console.log("失败");
           }

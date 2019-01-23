@@ -1,12 +1,12 @@
 .detail-container {
-  padding: 100px 0 0 0;
+  padding: 80px 0 0 0;
   width: 100%;
   display: flex;
 }
 
 .detail-base {
   width: 400px;
-  height: 640px;
+  /* height: 640px; */
   margin: 0 10px;
   background-color: #282b36;
   border-radius: 3px;
@@ -17,6 +17,7 @@
   /* animation: slideInUp 1s ease-in-out; */
   position: relative;
   overflow: hidden;
+  /* flex: 1 0 400px; */
 }
 
 .detail-base-avatar {
@@ -89,7 +90,7 @@
 
 .detail-user {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1;
   margin: 0 10px;
   background-color: #282b36;
   border-radius: 3px;
@@ -100,6 +101,28 @@
   color: #9a9a9a;
   padding: 0 10px 0 0;
 }
+
+
+
+
+
+
+.detail-info {
+  width: 400px;
+  /* height: 640px; */
+  margin: 0 10px;
+  background-color: #282b36;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* animation: slideInUp 1s ease-in-out; */
+  position: relative;
+  overflow: hidden;
+  /* flex: 1 0 400px; */
+}
+
 
 @keyframes slideInUp {
   from {
