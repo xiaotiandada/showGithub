@@ -162,6 +162,16 @@
   width: 100%;
 }
 
+
+
+
+
+.user-dounts {
+  /* display: flex; */
+}
+
+
+
 @keyframes slideInUp {
   from {
     transform: translate(0, 40px);

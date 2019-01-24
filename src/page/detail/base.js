@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Avatar, Tooltip } from "antd";
 
 import Basiccolumn from "./basiccolumn";
+import Dount from "./donut";
 
 class App extends Component {
   constructor(props) {
@@ -125,6 +126,11 @@ class App extends Component {
               <div className="number">{getUserInfo["followers"]}</div>
               <div className="number">{getUserInfo["following"]}</div>
             </div>
+            <div className="user-dounts">
+              <Dount />
+              <Dount />
+            </div>
+
             <Basiccolumn data={this.getRepos(gerRepos)} />
           </div>
           <div className="detail-info">
