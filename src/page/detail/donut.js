@@ -20,33 +20,13 @@ export default class Donut extends React.Component {
   render() {
     const { DataView } = DataSet;
     const { Html } = Guide;
-    const data = [
-      {
-        item: "事例一",
-        count: 40
-      },
-      {
-        item: "事例二",
-        count: 21
-      },
-      {
-        item: "事例三",
-        count: 17
-      },
-      {
-        item: "事例四",
-        count: 13
-      },
-      {
-        item: "事例五",
-        count: 9
-      }
-    ];
+    const { data, title } = this.props;
+
     const dv = new DataView();
     dv.source(data).transform({
       type: "percent",
       field: "count",
-      dimension: "item",
+      dimension: "name",
       as: "percent"
     });
     const cols = {
@@ -57,13 +37,19 @@ export default class Donut extends React.Component {
         }
       }
     };
+
+    console.log(this.props);
+    let htmlStr = `<div style="color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;color: #eee;">${title}</div>`;
+    const textStyle = {
+      fill: "#eee"
+    };
     return (
       <div>
         <Chart
-          height={window.innerHeight}
+          height={400}
           data={dv}
           scale={cols}
-          padding={[0, 20, 0, 20]}
+          padding={[0]}
           style={{
             boxSizing: "border-box",
             width: "50%",
@@ -71,12 +57,12 @@ export default class Donut extends React.Component {
           }}
           forceFit
         >
-          <Coord type={"theta"} radius={0.75} innerRadius={0.6} />
+          <Coord type={"theta"} radius={0.75} innerRadius={0.5} />
           <Axis name="percent" />
           <Legend
-            position="right"
-            offsetY={-window.innerHeight / 2 + 120}
+            position="right-center"
             offsetX={-100}
+            textStyle={textStyle}
           />
           <Tooltip
             showTitle={false}
@@ -85,7 +71,7 @@ export default class Donut extends React.Component {
           <Guide>
             <Html
               position={["50%", "50%"]}
-              html='<div style="color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;">Start比列</div>主机<br><span style="color:#262626;font-size:2.5em">200</span>台</div>'
+              html={htmlStr}
               alignX="middle"
               alignY="middle"
             />
@@ -93,13 +79,13 @@ export default class Donut extends React.Component {
           <Geom
             type="intervalStack"
             position="percent"
-            color="item"
+            color={["name", "#0089ff-#58abf2"]}
             tooltip={[
-              "item*percent",
-              (item, percent) => {
+              "name*percent",
+              (name, percent) => {
                 percent = percent * 100 + "%";
                 return {
-                  name: item,
+                  name: name,
                   value: percent
                 };
               }
@@ -108,14 +94,7 @@ export default class Donut extends React.Component {
               lineWidth: 1,
               stroke: "#fff"
             }}
-          >
-            <Label
-              content="percent"
-              formatter={(val, item) => {
-                return item.point.item + ": " + val;
-              }}
-            />
-          </Geom>
+          />
         </Chart>
       </div>
     );

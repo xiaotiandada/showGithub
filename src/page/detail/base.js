@@ -22,6 +22,7 @@ class App extends Component {
     return languageArrSet.filter(item => !!item);
   }
 
+  // 得到储存库数据
   getRepos(arr) {
     let dataArr = [];
     arr.map(item => {
@@ -32,6 +33,27 @@ class App extends Component {
         });
       }
     });
+    return this.reposSort(dataArr);
+  }
+
+  reposSort(arr) {
+    return arr.sort((a, b) => {
+      return b["count"] - a["count"];
+    });
+  }
+
+  getFollowerAndFollowing(arr) {
+    let dataArr = [];
+    dataArr.push(
+      {
+        name: "followers",
+        count: arr["followers"]
+      },
+      {
+        name: "following",
+        count: arr["following"]
+      }
+    );
     return dataArr;
   }
 
@@ -121,16 +143,13 @@ class App extends Component {
             </div>
           </div>
           <div className="detail-user">
-            <div className="detail-user__blocl">
-              <div className="number">{getUserInfo["public_repos"]}</div>
-              <div className="number">{getUserInfo["followers"]}</div>
-              <div className="number">{getUserInfo["following"]}</div>
-            </div>
             <div className="user-dounts">
-              <Dount />
-              <Dount />
+              <Dount data={this.getRepos(gerRepos)} title="Start比例" />
+              <Dount
+                data={this.getFollowerAndFollowing(getUserInfo)}
+                title="关注/粉丝"
+              />
             </div>
-
             <Basiccolumn data={this.getRepos(gerRepos)} />
           </div>
           <div className="detail-info">

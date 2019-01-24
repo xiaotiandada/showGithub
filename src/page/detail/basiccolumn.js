@@ -24,6 +24,19 @@ class App extends Component {
         tickInterval: 20
       }
     };
+    const label = {
+      textStyle: {
+        fill: "#eee"
+      },
+      formatter(text, item, index) {
+        let arr = text.slice(0, 6);
+        if (arr.length >= 6) {
+          return `${arr}...`;
+        } else {
+          return `${arr}`;
+        }
+      }
+    };
     return (
       <Fragment>
         <Chart
@@ -35,8 +48,8 @@ class App extends Component {
             width: "100%"
           }}
         >
-          <Axis name="name" />
-          <Axis name="count" />
+          <Axis name="name" label={label} />
+          <Axis name="count" label={label} />
           <Tooltip
             crosshairs={{
               type: "y"

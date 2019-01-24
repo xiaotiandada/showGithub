@@ -1,11 +1,5 @@
-import React, {
-  Component,
-  Fragment
-} from "react";
-import {
-  List,
-  Avatar
-} from "antd";
+import React, { Component, Fragment } from "react";
+import { List, Avatar } from "antd";
 
 // 接口
 import Api from "../../services/get-user-info";
@@ -30,7 +24,7 @@ class App extends Component {
   // 得到用户信息
   getUserDetail(name) {
     let reposParams = {
-      type: 'owner',
+      type: "owner",
       sort: "updated"
     };
     const getUserInfo = async name => await Api.getUserInfo(name);
@@ -79,49 +73,32 @@ class App extends Component {
   }
 
   sendResponseData(boolean, data) {
-    const {
-      sendData
-    } = this.props;
+    const { sendData } = this.props;
     sendData(boolean, data);
   }
 
   render() {
-    const {
-      dataChild
-    } = this.props;
-    return ( <
-      Fragment >
-      <
-      List className = "user-list"
-      itemLayout = "horizontal"
-      dataSource = {
-        dataChild.userList
-      }
-      renderItem = {
-        item => ( <
-          List.Item >
-          <
-          List.Item.Meta avatar = { < Avatar src = {
-              item.avatar_url
-            }
-            />}
-            title = {
-              item.login
-            }
-            description = {
-              item.html_url
-            }
-            onClick = {
-              this.viewUserInfo.bind(this, item.login)
-            }
-            /> < /
-            List.Item >
-          )
-        }
-        /> < /
-        Fragment >
-      );
-    }
+    const { dataChild } = this.props;
+    return (
+      <Fragment>
+        <List
+          className="user-list"
+          itemLayout="horizontal"
+          dataSource={dataChild.userList}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src={item.avatar_url} />}
+                title={item.login}
+                description={item.html_url}
+                onClick={this.viewUserInfo.bind(this, item.login)}
+              />
+            </List.Item>
+          )}
+        />
+      </Fragment>
+    );
   }
+}
 
-  export default App;
+export default App;
