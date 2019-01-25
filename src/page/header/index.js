@@ -21,7 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       userName: this.props.userName,
-      headerStatus: true,
+      headerStatus: false,
       source: false,
       showSpin: false,
       message: "",
@@ -33,9 +33,9 @@ class App extends Component {
     this.searchValue = this.searchValue.bind(this);
   }
 
-  componentDidMount() {
-    this.searchValue("xiaotiandada");
-  }
+  // componentDidMount() {
+  //   this.searchValue("xiaotiandada");
+  // }
 
   searchValue(value) {
     const { setUserName } = this.props;

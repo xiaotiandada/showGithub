@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // 引入组件
-import Header from "./header/index";
+import Index from "./index/index";
 import Detail from "./detail/index";
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     super();
     this.state = {
       userList: [],
-      detailShow: true
+      detailShow: false
     };
     this.toggleDetailShow = this.toggleDetailShow.bind(this);
     this.sendData = this.sendData.bind(this);
@@ -25,14 +25,20 @@ class App extends Component {
   }
 
   render() {
+    const IndexDom = () => (
+      <Index
+        toggleDetailShow={this.toggleDetailShow}
+        sendData={this.sendData}
+      />
+    );
+    const AboutDom = () => <Detail userList={this.state.userList} />;
     return (
-      <Fragment>
-        <Header
-          toggleDetailShow={this.toggleDetailShow}
-          sendData={this.sendData}
-        />
-        {this.state.detailShow && <Detail userList={this.state.userList} />}
-      </Fragment>
+      <Router>
+        <Fragment>
+          <Route path="/" exact component={IndexDom} />
+          <Route path="/about/" component={AboutDom} />
+        </Fragment>
+      </Router>
     );
   }
 }
