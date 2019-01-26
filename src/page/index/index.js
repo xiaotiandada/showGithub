@@ -2,45 +2,33 @@ import React, { Component, Fragment } from "react";
 import "./index.css";
 
 // antd
-import { Input, Avatar, Alert } from "antd";
+import { Input } from "antd";
 
 // redux
 import { connect } from "react-redux";
 import action from "../../store/action/index";
 
-// 接口
-import Api from "../../services/get-user-info";
-
-// components
-import SpinDom from "../components/spin";
 // antd
 const Search = Input.Search;
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showSpin: false
-    };
+class Index extends Component {
+  constructor() {
+    super();
     this.searchValue = this.searchValue.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.searchValue("xiaotiandada");
-  // }
-
-  searchValue(value) {
-    const { setUserName } = this.props;
-    if (!value) return alert("请输入用户名");
-    setUserName(value);
+  searchValue(userName) {
+    const { setUserName, searchUserName } = this.props;
+    if (!userName) return alert("请输入用户名");
+    setUserName(userName);
+    searchUserName(userName);
   }
 
   render() {
     const { userName } = this.props;
-    console.log(this.props);
     return (
       <Fragment>
-        <header className="search-name">
+        <div className="search-name">
           <Search
             className="search-input"
             size="large"
@@ -49,8 +37,7 @@ class App extends Component {
             onSearch={this.searchValue}
             enterButton
           />
-        </header>
-        <SpinDom showSpin={this.state.showSpin} />
+        </div>
       </Fragment>
     );
   }
@@ -62,4 +49,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   action
-)(App);
+)(Index);

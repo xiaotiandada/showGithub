@@ -4,10 +4,9 @@ import { Avatar, Tooltip } from "antd";
 import Basiccolumn from "./basiccolumn";
 import Dount from "./donut";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+class Base extends Component {
+  constructor() {
+    super();
     this.avatarClick = this.avatarClick.bind(this);
   }
   avatarClick() {
@@ -169,4 +168,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Base;

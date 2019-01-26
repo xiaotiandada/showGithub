@@ -24,13 +24,12 @@ class App extends Component {
     });
   }
 
+  searchUserName(userName) {
+    console.log(userName);
+  }
+
   render() {
-    const IndexDom = () => (
-      <Index
-        toggleDetailShow={this.toggleDetailShow}
-        sendData={this.sendData}
-      />
-    );
+    const IndexDom = () => <Index searchUserName={this.searchUserName} />;
     const AboutDom = () => <Detail userList={this.state.userList} />;
     return (
       <Router>
