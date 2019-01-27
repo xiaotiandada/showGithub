@@ -7,6 +7,10 @@ import DetailDom from "./info/index";
 
 import SpinDomo from "./components/spin";
 
+// redux
+import { connect } from "react-redux";
+import action from "../store/action/index";
+
 // api
 import axios from "axios";
 import Api from "../services/get-user-info";
@@ -15,7 +19,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userList: [],
       infoData: Object.create(null),
       spinInShow: false
     };
@@ -33,7 +36,8 @@ class App extends Component {
     await Api.searchUser(query)
       .then(response => {
         if (response.status === 200) {
-          this.setState({ userList: response["data"]["items"] });
+          const { setUserList } = this.props;
+          setUserList(response["data"]["items"]);
         } else {
           console.log("失败");
         }
@@ -91,13 +95,9 @@ class App extends Component {
     const IndexRouteDom = () => (
       <IndexDom searchUserName={this.searchUserName} />
     );
-    const ListRouteDom = () => (
-      <ListDom
-        userList={this.state.userList}
-        getUserDetail={this.getUserDetail}
-      />
-    );
+    const ListRouteDom = () => <ListDom getUserDetail={this.getUserDetail} />;
     const AboutRouteDom = () => <DetailDom infoData={this.state.infoData} />;
+
     return (
       <Fragment>
         <Router>
@@ -118,4 +118,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+});
+export default connect(
+  mapStateToProps,
+  action
+)(App);

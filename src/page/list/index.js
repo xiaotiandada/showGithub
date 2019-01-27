@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from "react";
+
+// redux
+import { connect } from "react-redux";
+
 import { List, Avatar } from "antd";
 import "./index.css";
-export default class ListDom extends Component {
+class ListDom extends Component {
   render() {
     const { userList, getUserDetail } = this.props;
     return (
@@ -25,3 +29,8 @@ export default class ListDom extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  ...state
+});
+export default connect(mapStateToProps)(ListDom);

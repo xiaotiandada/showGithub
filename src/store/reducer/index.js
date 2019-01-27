@@ -1,12 +1,10 @@
-import count from "./index1";
 import userName from "./user-name";
-import {
-  combineReducers
-} from "redux";
+import userList from "./user-list";
+import { combineReducers } from "redux";
 
 const list = {
-  count,
-  userName
+  userName,
+  userList
 };
 
 export default combineReducers({

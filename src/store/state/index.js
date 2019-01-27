@@ -1,1 +1,2 @@
-export let userName = 'xiaotian'
+export let userName = "xiaotian";
+export let userList = [];

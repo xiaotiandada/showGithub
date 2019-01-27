@@ -1,23 +1,26 @@
+import * as Action from "./action-types";
+
 export default {
-  incremetn() {
-    return {
-      type: "INCREMENT"
-    }
-  },
-  decrement() {
-    return {
-      type: "DECREMENT"
-    }
-  },
   setUserName(val) {
     return {
-      type: 'SETUSERNAME',
+      type: Action.SETUSERNAME,
       value: val
-    }
+    };
   },
   removeUserName() {
     return {
-      type: 'REMOVEUSERNAME'
-    }
+      type: Action.REMOVEUSERNAME
+    };
+  },
+  setUserList(val) {
+    return {
+      type: Action.SETUSERLIST,
+      value: val
+    };
+  },
+  removeUserList() {
+    return {
+      type: Action.REMOVEUSERLIST
+    };
   }
-}
+};
