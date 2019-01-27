@@ -4,7 +4,7 @@ import { Avatar, Tooltip } from "antd";
 import Basiccolumn from "./basiccolumn";
 import Dount from "./donut";
 
-class Base extends Component {
+class BaseDom extends Component {
   constructor() {
     super();
     this.avatarClick = this.avatarClick.bind(this);
@@ -31,6 +31,7 @@ class Base extends Component {
           count: item["stargazers_count"]
         });
       }
+      return dataArr;
     });
     return this.reposSort(dataArr);
   }
@@ -57,13 +58,13 @@ class Base extends Component {
   }
 
   render() {
+    console.log(this.props);
     const {
       getUserInfo,
       gerRepos,
       getFollowers,
       getFollowing
-    } = this.props.data;
-    console.log(this.props);
+    } = this.props.infoData;
     const LanguageTagDom = props => {
       return props["data"].map((item, index) => (
         <span className="language-tag" key={index}>
@@ -76,7 +77,11 @@ class Base extends Component {
       return props.map((item, i) => (
         <Tooltip title={item["login"]} key={i}>
           <li>
-            <a href={item["html_url"]} target="_blank">
+            <a
+              href={item["html_url"]}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <img src={item["avatar_url"]} alt={item["login"]} />
             </a>
           </li>
@@ -168,4 +173,4 @@ class Base extends Component {
   }
 }
 
-export default Base;
+export default BaseDom;

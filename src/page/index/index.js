@@ -11,7 +11,7 @@ import action from "../../store/action/index";
 // antd
 const Search = Input.Search;
 
-class Index extends Component {
+class IndexDom extends Component {
   constructor() {
     super();
     this.searchValue = this.searchValue.bind(this);
@@ -49,4 +49,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   action
-)(Index);
+)(IndexDom);

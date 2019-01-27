@@ -1,19 +1,5 @@
 import React from "react";
-import {
-  G2,
-  Chart,
-  Geom,
-  Axis,
-  Tooltip,
-  Coord,
-  Label,
-  Legend,
-  View,
-  Guide,
-  Shape,
-  Facet,
-  Util
-} from "bizcharts";
+import { Chart, Geom, Axis, Tooltip, Coord, Legend, Guide } from "bizcharts";
 import DataSet from "@antv/data-set";
 
 export default class Donut extends React.Component {

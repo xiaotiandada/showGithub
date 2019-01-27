@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Spin } from "antd";
 
-class App extends Component {
+export default class SpinDom extends Component {
   render() {
-    const { showSpin } = this.props;
+    const { spinInShow } = this.props;
     return (
       <Fragment>
-        {showSpin && (
+        {spinInShow && (
           <div
             style={{
               position: "fixed",
@@ -27,5 +27,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
