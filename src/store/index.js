@@ -1,9 +1,24 @@
 import { createStore, applyMiddleware } from "redux";
-// import { persistStore, persistReducer } from "redux-persist";
-import Reducer from "./reducer/index";
+import rootReducer from "./reducer/index";
 import logger from "redux-logger";
-import { composeWithDevTools } from "redux-devtools-extension";
+// import { composeWithDevTools } from "redux-devtools-extension";
 
-let store = createStore(Reducer, composeWithDevTools(applyMiddleware(logger)));
+// let store = createStore(Reducer, composeWithDevTools(applyMiddleware(logger)));
 
-export default store;
+// export default store;
+
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
+
+const persistConfig = {
+  key: "root",
+  storage
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export default () => {
+  let store = createStore(persistedReducer);
+  let persistor = persistStore(store);
+  return { store, persistor };
+};

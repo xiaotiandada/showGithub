@@ -22,5 +22,16 @@ export default {
     return {
       type: Action.REMOVEUSERLIST
     };
+  },
+  setUserInfo(val) {
+    return {
+      type: Action.SETUSERINFO,
+      value: val
+    };
+  },
+  removeUserInfo() {
+    return {
+      type: Action.REMOVEUSERINFO
+    };
   }
 };

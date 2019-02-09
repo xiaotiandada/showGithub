@@ -24,7 +24,7 @@ export default class Donut extends React.Component {
       }
     };
 
-    console.log(this.props);
+    // console.log(this.props);
     let htmlStr = `<div style="color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;color: #eee;">${title}</div>`;
     const textStyle = {
       fill: "#eee"

@@ -1,12 +1,14 @@
 import userName from "./user-name";
 import userList from "./user-list";
+import userInfo from "./user-info";
 import { combineReducers } from "redux";
 
-const list = {
+const reducerList = {
   userName,
-  userList
+  userList,
+  userInfo
 };
 
 export default combineReducers({
-  ...list
+  ...reducerList
 });

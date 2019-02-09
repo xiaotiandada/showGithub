@@ -76,11 +76,12 @@ class App extends Component {
             getFollowers.status === 200 &&
             getFollowing.status === 200;
           if (boolean) {
+            const { setUserInfo } = this.props;
             arrData.getUserInfo = getUserInfo.data;
             arrData.gerRepos = gerRepos.data;
             arrData.getFollowers = getFollowers.data;
             arrData.getFollowing = getFollowing.data;
-            this.setState({ infoData: arrData });
+            setUserInfo(arrData);
           } else {
             console.log("失败");
           }
@@ -96,8 +97,7 @@ class App extends Component {
       <IndexDom searchUserName={this.searchUserName} />
     );
     const ListRouteDom = () => <ListDom getUserDetail={this.getUserDetail} />;
-    const AboutRouteDom = () => <DetailDom infoData={this.state.infoData} />;
-
+    const AboutRouteDom = () => <DetailDom infoData={this.props.userInfo} />;
     return (
       <Fragment>
         <Router>

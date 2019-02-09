@@ -7,11 +7,17 @@ import App from "./page/index";
 import * as serviceWorker from "./serviceWorker";
 
 import { Provider } from "react-redux";
-import store from "./store/index.js";
+import ReducerConfigStore from "./store/index";
+
+import { PersistGate } from "redux-persist/integration/react";
+
+const { store, persistor } = ReducerConfigStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
