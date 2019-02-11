@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducer/index";
 import logger from "redux-logger";
-// import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 // let store = createStore(Reducer, composeWithDevTools(applyMiddleware(logger)));
 
@@ -18,7 +18,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
-  let store = createStore(persistedReducer);
+  let store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(logger)));
   let persistor = persistStore(store);
   return { store, persistor };
 };

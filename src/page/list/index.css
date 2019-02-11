@@ -2,8 +2,9 @@
   background-color: #282b36;
   color: #fff;
   padding: 20px;
-  margin: 100px 10px 0;
+  margin: 10px;
   border-radius: 3px;
+  box-sizing: border-box;
   /* animation: slideInUp 1s ease-in-out; */
 }
 
