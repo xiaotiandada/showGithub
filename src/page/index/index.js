@@ -45,11 +45,9 @@ class IndexDom extends Component {
         if (response.status === 200) {
           const { setUserList } = this.props;
           setUserList(response["data"]["items"]);
+          this.setState({ spinInShow: false });
           this.props.history.push("/list");
-        } else {
-          console.log("失败");
         }
-        this.setState({ spinInShow: false });
       })
       .catch(err => {
         console.log(err);
